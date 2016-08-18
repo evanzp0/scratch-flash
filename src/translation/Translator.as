@@ -35,8 +35,8 @@ import util.*;
 
 public class Translator {
 
-	public static var languages:Array = []; // contains pairs: [<language code>, <utf8 language name>]
-	public static var currentLang:String = 'en';
+	public static var languages:Array = ['zh_CN','en']; // contains pairs: [<language code>, <utf8 language name>]
+	public static var currentLang:String = 'zh_CN';
 
 	public static var rightToLeft:Boolean;
 	public static var rightToLeftMath:Boolean; // true only for Arabic
@@ -70,14 +70,14 @@ public class Translator {
 			}
 			Scratch.app.translationChanged();
 		}
-		
+
 		dictionary = {}; // default to English (empty dictionary) if there's no .po file
 		setFontsFor('en');
 		if ('en' == lang) Scratch.app.translationChanged(); // there is no .po file English
 		else Scratch.app.server.getPOFile(lang, gotPOFile);
 
 	}
-	
+
 	public static function setLanguage(lang:String):void {
 		if ('import translation file' == lang) { importTranslationFromFile(); return; }
 		if ('set font size' == lang) { fontSizeMenu(); return; }
@@ -125,7 +125,7 @@ public class Translator {
 		rightToLeftMath = ('ar' == lang);
 		Block.setFonts(10, 9, true, 0); // default font settings
 		if (font12.indexOf(lang) > -1) Block.setFonts(12, 11, false, 0);
-		if (font13.indexOf(lang) > -1) Block.setFonts(13, 12, false, 0);
+		if (font13.indexOf(lang) > -1) Block.setFonts(14, 12, false, 0);
 	}
 
 	public static function map(s:String, context:Dictionary=null):String {

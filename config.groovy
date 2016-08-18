@@ -1,6 +1,6 @@
 environments {
     '11.6' {
-        output = 'Scratch'
+        output = 'Scratch2'
         playerVersion = '11.6'
         additionalCompilerOptions = [
                 "-swf-version=19",

@@ -133,7 +133,7 @@ public class Server implements IServer {
 		// Re-trying here should help project save failures but we'll need to add more code to re-try loading projects
 		if (event is SecurityErrorEvent) {
 			var urlPathStart:int = url.indexOf('/', 10);
-			var policyFileURL:String = url.substr(0, urlPathStart) + '/crossdomain.xml?cb=' + Math.random();
+			var policyFileURL:String = 'http://cdn.assets.scratch.mit.edu/crossdomain.xml';//url.substr(0, urlPathStart) + '/crossdomain.xml?cb=' + Math.random();
 			Security.loadPolicyFile(policyFileURL);
 			Scratch.app.log(LogLevel.WARNING, 'Reloading policy file', {policy: policyFileURL, initiator: url});
 		}
@@ -242,6 +242,7 @@ public class Server implements IServer {
 
 	// Make a simple GET. Uses the same callbacks as callServer().
 	public function serverGet(url:String, whenDone:Function):URLLoader {
+    //Scratch.app.log(LogLevel.WARNING, 'serverGet', url);
 		return callServer(url, null, null, whenDone);
 	}
 
@@ -258,7 +259,8 @@ public class Server implements IServer {
 	}
 
 	public function getMediaLibrary(libraryType:String, whenDone:Function):URLLoader {
-		var url:String = getCdnStaticSiteURL() + 'medialibraries/' + libraryType + 'Library.json';
+		// var url:String = getCdnStaticSiteURL() + 'medialibraries/' + libraryType + 'Library.json';
+    var url:String = URLs.libPrefix + 'medialibraries/' + libraryType + 'Library.json';
 		return serverGet(url, whenDone);
 	}
 
@@ -305,7 +307,8 @@ public class Server implements IServer {
 	}
 
 	public function getThumbnail(idAndExt:String, w:int, h:int, whenDone:Function):URLLoader {
-		var url:String = getCdnStaticSiteURL() + 'medialibrarythumbnails/' + idAndExt;
+		// var url:String = getCdnStaticSiteURL() + 'medialibrarythumbnails/' + idAndExt;
+		var url:String = URLs.libPrefix + 'medialibrarythumbnails/' + idAndExt;
 		return downloadThumbnail(url, w, h, whenDone);
 	}
 
@@ -330,7 +333,7 @@ public class Server implements IServer {
 	public function setSelectedLang(lang:String):void {
 		// Record the language setting.
 		var sharedObj:SharedObject = SharedObject.getLocal('Scratch');
-		if (lang == '') lang = 'en';
+		if (lang == '') lang = 'zh_CN';
 		sharedObj.data.lang = lang;
 		sharedObj.flush();
 	}
