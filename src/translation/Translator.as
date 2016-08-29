@@ -35,8 +35,8 @@ import util.*;
 
 public class Translator {
 
-	public static var languages:Array = ['zh_CN','en']; // contains pairs: [<language code>, <utf8 language name>]
-	public static var currentLang:String = 'zh_CN';
+	public static var languages:Array = []; // contains pairs: [<language code>, <utf8 language name>]
+	public static var currentLang:String = '';
 
 	public static var rightToLeft:Boolean;
 	public static var rightToLeftMath:Boolean; // true only for Arabic
